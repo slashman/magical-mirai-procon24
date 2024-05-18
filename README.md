@@ -1,0 +1,1 @@
+`npx webpack` then serve `/dist`
