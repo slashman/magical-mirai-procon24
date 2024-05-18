@@ -7,11 +7,20 @@
   <body>
     <div id="overlay"><button class="play" disabled>再生</button></div>
     <div id="container">
-      <div>
-        <p id="lyrics">
-          <span id="text"></span>
-        </p>
-      </div>
+      <img src = "img/rainbow.jpeg" width="100%" height="100%">
+      <svg width="100%" height="100%">
+          <defs>
+              <mask id="myText" width="100%" height="100%" x="0" y="0" >
+                  <rect width="100%" height="100%" x="0" y="0" style="fill: white;"/>
+                  <text x="10%" y="20%" fill="black" text-anchor="left" id = "svgText" filter="url(#f1)"></text>
+                  <image x="50%" y="40%" href="img/miku.png" width="20%" filter="url(#f1)">
+              </mask>
+              <filter id="f1" x="0" y="0" xmlns="http://www.w3.org/2000/svg">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+              </filter>
+          </defs>
+          <rect width="100%" height="100%" x="0" y="0" />
+      </svg>
     </div>
     <div id="media"></div>
     <div id="header">

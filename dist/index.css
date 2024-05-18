@@ -1,3 +1,5 @@
+/* TextAlive App API basic example CSS */
+
 #overlay {
     position: absolute;
     top: 0;
@@ -79,3 +81,43 @@
   #control > button:last-child {
     margin-right: 0;
   }
+
+/* TextAlive App API basic example CSS */
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Koulen&family=Luckiest+Guy&display=swap');
+
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Bowlby One SC','Koulen','Luckiest Guy', cursive;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: black;
+    margin: 0;
+}
+
+svg {
+    font-size: 8em;
+    font-family: "Arial";
+    font-weight: 900;
+    text-transform: uppercase;
+    transition: all 0.5s linear;
+    position: absolute;
+    inset: 0;
+    height: 100%;
+}
+
+svg rect {
+    mask: url(#myText);
+}
+
+/* Media Query */
+@media screen and (max-width: 745px) {
+    svg {
+        font-size: 5em;
+    }
+}

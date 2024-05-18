@@ -65,14 +65,24 @@ const animateWord = function (now, unit) {
     unit.spent = true;
     console.log(unit.previous.endTime - unit.startTime);
     if (unit.previous.endTime - unit.startTime < -60) {
-      document.querySelector("#text").textContent = ''; 
+      clearText();
     }
-    document.querySelector("#text").textContent += unit.text;
+    addText(unit.text);
     if (unit.language === "en") {
-      document.querySelector("#text").textContent += " ";
-    }
+      addText(" ");
+    }    
   }
 };
+
+function addText(str) {
+  //document.querySelector("#text").textContent += unit.text;
+  document.getElementById("svgText").innerHTML += str;
+}
+
+function clearText() {
+  // document.querySelector("#text").textContent = ''; 
+  document.getElementById("svgText").innerHTML = '';
+}
 
 // TextAlive Player を作る
 // Instantiate a TextAlive Player instance
