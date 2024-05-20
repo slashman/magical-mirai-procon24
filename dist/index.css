@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Koulen&family=Luckiest+Guy&display=swap');
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Bowlby One SC','Koulen','Luckiest Guy', cursive;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  margin: 0;
+}
+
 /* TextAlive App API basic example CSS */
 
 #overlay {
@@ -23,16 +40,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  #container > div {
-    width: 100%;
-  }
-  
-  #container p {
-    padding: 0 0.5em;
-    font-weight: bold;
-    text-align: left;
   }
   
   #lyrics {
@@ -82,26 +89,38 @@
     margin-right: 0;
   }
 
-/* TextAlive App API basic example CSS */
-@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Koulen&family=Luckiest+Guy&display=swap');
+/* CSS Masking CSS */
 
-html {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+#tabletContainer {
+  width: 1364px;
+  height: 1262px;
+  position: relative;
+  transform: scale(0.7);
 }
 
-body {
-    font-family: 'Bowlby One SC','Koulen','Luckiest Guy', cursive;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: black;
-    margin: 0;
+#tabletFront {
+  width: 1364px;
+  position: absolute;
+}
+
+#tabletMask {
+  width: 780px;
+  height: 1080px;
+  position: absolute;
+  top: 48px;
+  left: 290px;
+}
+
+#tabletBack {
+  width: 780px;
+  height: 1080px;
+  position: absolute;
+  top: 48px;
+  left: 290px;
 }
 
 svg {
-    font-size: 8em;
+    font-size: 96px;
     font-family: "Arial";
     font-weight: 900;
     text-transform: uppercase;
@@ -113,11 +132,4 @@ svg {
 
 svg rect {
     mask: url(#myText);
-}
-
-/* Media Query */
-@media screen and (max-width: 745px) {
-    svg {
-        font-size: 5em;
-    }
 }
