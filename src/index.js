@@ -196,10 +196,10 @@ function onVideoReady(v) {
   // 定期的に呼ばれる各単語の "animate" 関数をセットする
   // Set "animate" function
   let w = player.video.firstWord;
-  while (w) {
+  /*while (w) {
     w.animate = animateWord;
     w = w.next;
-  }
+  }*/
 }
 
 /**
@@ -221,6 +221,46 @@ function onTimerReady(t) {
   jumpBtn.disabled = !player.video.firstChar;
 }
 
+function step(timeStamp) {
+  update(timeStamp);
+  window.requestAnimationFrame(step);
+}
+
+let currentIndex = -1;
+let previousProgress = -1;
+let resetBeat = false;
+
+function update() {
+  const position = player.timer.position;
+  positionEl.textContent = String(Math.floor(position));
+  if (!player.video) {
+    return;
+  }
+  const char = player.video.findChar(position, { loose: false });
+  if (!char) {
+    return;
+  }
+  const phrase = player.video.findPhrase(position);
+  // if (phrase && phrase.progress(position) > 0.95) {
+  if (phrase.progress(position) < previousProgress) {
+    clearText();
+  }
+  previousProgress = phrase.progress(position);
+  const index = player.video.findIndex(char);
+  if (index === currentIndex) {
+    return;
+  }
+  currentIndex = index;
+  
+  /*if (unit.previous.endTime - unit.startTime < -60) {
+    clearText();
+  }*/
+  addText(char.text);
+  // さらに精確な情報が必要な場合は `player.timer.position` でいつでも取得できます
+}
+
+window.requestAnimationFrame(step);
+
 /**
  * 動画の再生位置が変更されたときに呼ばれる（あまりに頻繁な発火を防ぐため一定間隔に間引かれる）
  *
@@ -229,7 +269,7 @@ function onTimerReady(t) {
 function onThrottledTimeUpdate(position) {
   // 再生位置を表示する
   // Update current position
-  positionEl.textContent = String(Math.floor(position));
+  //positionEl.textContent = String(Math.floor(position));
 
   // さらに精確な情報が必要な場合は `player.timer.position` でいつでも取得できます
   // More precise timing information can be retrieved by `player.timer.position` at any time
