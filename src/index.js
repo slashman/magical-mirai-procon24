@@ -74,14 +74,19 @@ const animateWord = function (now, unit) {
   }
 };
 
+let textCount = 0;
 function addText(str) {
-  //document.querySelector("#text").textContent += unit.text;
+  textCount++;
+  if (textCount > 11) {
+    clearText();
+  }
   document.getElementById("svgText").innerHTML += str;
 }
 
 function clearText() {
   // document.querySelector("#text").textContent = ''; 
   document.getElementById("svgText").innerHTML = '';
+  textCount = 0;
 }
 
 // TextAlive Player を作る
