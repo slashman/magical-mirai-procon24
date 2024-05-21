@@ -89,6 +89,16 @@ function clearText() {
   textCount = 0;
 }
 
+let flipped = false;
+function flipMiku () {
+  flipped = !flipped;
+  if (flipped) {
+    document.getElementById("svgMiku").setAttribute('transform', "scale(-1,1) translate(-880, 0)");
+  } else {
+    document.getElementById("svgMiku").setAttribute('transform', "scale(1,1) translate(0, 0)");
+  }
+}
+
 // TextAlive Player を作る
 // Instantiate a TextAlive Player instance
 const player = new Player({
@@ -235,6 +245,18 @@ function update() {
   positionEl.textContent = String(Math.floor(position));
   if (!player.video) {
     return;
+  }
+  const beat = player.findBeat(position);
+  if (beat) {
+    const progress = beat.progress(position);
+    if (progress < 0.1) {
+      resetBeat = true;
+    }
+    document.getElementById("beat") .style.height = (progress * 200) + "px";
+    if (progress > 0.9 && resetBeat) {
+      resetBeat = false;
+      flipMiku();
+    }
   }
   const char = player.video.findChar(position, { loose: false });
   if (!char) {

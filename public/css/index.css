@@ -133,3 +133,7 @@ svg {
 svg rect {
     mask: url(#myText);
 }
+
+#beat {
+  background-color: aqua;
+}
