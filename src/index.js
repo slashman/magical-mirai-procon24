@@ -192,7 +192,6 @@ function onVideoReady(v) {
   // Set "animate" function
   let w = player.video.firstWord;
   while (w) {
-    debugger;
     w.animate = animateWord;
     w = w.next;
   }
@@ -237,11 +236,5 @@ function onPlay() {
   document.querySelector("#overlay").style.display = "none";
 }
 
-// 再生が一時停止・停止したら歌詞表示をリセット
-// Reset lyrics text field when music playback is paused or stopped
-function onPause() {
-  document.querySelector("#text").textContent = "-";
-}
-function onStop() {
-  document.querySelector("#text").textContent = "-";
-}
+function onPause() {}
+function onStop() {}
