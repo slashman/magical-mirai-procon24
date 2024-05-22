@@ -12,6 +12,7 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: white;
+  background-image: url('../img/clouds.jpg');
   margin: 0;
 }
 
