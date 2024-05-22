@@ -254,7 +254,7 @@ function update() {
     if (progress < 0.1) {
       resetBeat = true;
     }
-    document.getElementById("beat") .style.height = (progress * 200) + "px";
+    //document.getElementById("beat") .style.height = (progress * 200) + "px";
     if (progress > 0.9 && resetBeat) {
       resetBeat = false;
       flipMiku();
