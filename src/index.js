@@ -239,6 +239,8 @@ function step(timeStamp) {
 let currentIndex = -1;
 let previousProgress = -1;
 let resetBeat = false;
+let spaceRendered = false;
+let previousWord;
 
 function update() {
   const position = player.timer.position;
@@ -260,14 +262,27 @@ function update() {
   }
   const char = player.video.findChar(position, { loose: false });
   if (!char) {
+    if (!spaceRendered) {
+      addText(" ");
+      spaceRendered = true;
+    }
     return;
   }
+  spaceRendered = false;
   const phrase = player.video.findPhrase(position);
   // if (phrase && phrase.progress(position) > 0.95) {
   if (phrase.progress(position) < previousProgress) {
     clearText();
   }
   previousProgress = phrase.progress(position);
+  const word = player.video.findWord(position);
+  if (previousWord && word != previousWord) {
+    console.log(previousWord.language);
+    if (previousWord.language == "en") {
+      addText(" ");
+    }
+  }
+  previousWord = word;
   const index = player.video.findIndex(char);
   if (index === currentIndex) {
     return;
