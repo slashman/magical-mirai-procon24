@@ -58,7 +58,7 @@ const songs = {
   }
 };
 
-const selectedSong = songs.futureSymphony;
+const selectedSong = songs.futureNotes;
 
 const animateWord = function (now, unit) {
   if (unit.contains(now) && !unit.spent) {
