@@ -92,8 +92,9 @@ function clearText() {
 */
 
 let textCount = 0;
-let cursorX = 40;
-let cursorY = 80;
+const cursorStart = 10;
+let cursorX = cursorStart;
+let lineY = 1;
 function addText(str) {
   textCount++;
   if (textCount > 19) {
@@ -105,8 +106,12 @@ function addText(str) {
   const charWidth = 64; // getTextWidth(str, "Arial 64pt");
   console.log("charWidth", charWidth);
   cursorX += charWidth;
-  cursorX += Math.floor(Math.random() * 20) - 10;
-  cursorY += Math.floor(Math.random() * 20) - 10;
+  cursorX += Math.floor(Math.random() * 15) - 7;
+  if (cursorX > 700) {
+    lineY++;
+    cursorX = cursorStart + charWidth + Math.floor(Math.random() * 20) - 10;
+  }
+  const cursorY = (lineY * (80 + 10)) + Math.floor(Math.random() * 10) - 5;
   txElement.setAttribute("x", cursorX);
   txElement.setAttribute("y", cursorY);
 }
@@ -127,7 +132,7 @@ function clearText() {
   }
   textCount = 0;
   cursorX = 40;
-  cursorY = 80;
+  lineY = 1;
 }
 
 let flipped = false;
