@@ -74,6 +74,7 @@ const animateWord = function (now, unit) {
   }
 };
 
+/*
 let textCount = 0;
 function addText(str) {
   textCount++;
@@ -87,6 +88,46 @@ function clearText() {
   // document.querySelector("#text").textContent = ''; 
   document.getElementById("svgText").innerHTML = '';
   textCount = 0;
+}
+*/
+
+let textCount = 0;
+let cursorX = 40;
+let cursorY = 80;
+function addText(str) {
+  textCount++;
+  if (textCount > 19) {
+    // All text used sorry
+    return;
+  }
+  const txElement = document.getElementById("tx" + textCount);
+  txElement.innerHTML = str;
+  const charWidth = 64; // getTextWidth(str, "Arial 64pt");
+  console.log("charWidth", charWidth);
+  cursorX += charWidth;
+  cursorX += Math.floor(Math.random() * 20) - 10;
+  cursorY += Math.floor(Math.random() * 20) - 10;
+  txElement.setAttribute("x", cursorX);
+  txElement.setAttribute("y", cursorY);
+}
+
+function getTextWidth(text, font) {
+  // re-use canvas object for better performance
+  const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+  context.font = font;
+  const metrics = context.measureText(text);
+  return metrics.width;
+}
+
+function clearText() {
+  for (let i = 1; i <= 19; i++) {
+    const txElement = document.getElementById("tx" + i);
+    txElement.innerHTML = "";
+  }
+  textCount = 0;
+  cursorX = 40;
+  cursorY = 80;
 }
 
 let flipped = false;
