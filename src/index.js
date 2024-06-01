@@ -135,13 +135,58 @@ function clearText() {
   lineY = 1;
 }
 
+let animIndex = 1;
+let animDir = 1;
+let bopIndex = 0;
 let flipped = false;
 function flipMiku () {
-  flipped = !flipped;
-  if (flipped) {
-    document.getElementById("svgMiku").setAttribute('transform', "scale(-1,1) translate(-880, 0)");
+  bopIndex++;
+  animIndex += animDir;
+  if (animDir == 1) {
+    if (animIndex === 4) {
+      animIndex = 2;
+      animDir = -1;
+    }
   } else {
-    document.getElementById("svgMiku").setAttribute('transform', "scale(1,1) translate(0, 0)");
+    if (animIndex === 0) {
+      animIndex = 1;
+      animDir = 1;
+    }
+  }
+  document.getElementById("svgMikuBody").setAttribute('href', "img/mikuBody"+animIndex+".png");
+  if (bopIndex > 1) {
+    flipped = !flipped;
+    document.getElementById("svgMikuBody").setAttribute('y', flipped ? 280 : 300);
+    document.getElementById("svgMikuEyes").setAttribute('y', flipped ? 280 : 300);
+    document.getElementById("svgMikuMouth").setAttribute('y', flipped ? 280 : 300);
+    bopIndex = 0;
+  }
+}
+
+let flippedMouth = false;
+function changeMouth () {
+  flippedMouth = !flippedMouth;
+  if (flippedMouth) {
+    document.getElementById("svgMikuMouth").setAttribute('href', "img/mikuMouth1.png");
+  } else {
+    document.getElementById("svgMikuMouth").setAttribute('href', "img/mikuMouth2.png");
+  }
+}
+
+function setMouth (type) {
+  document.getElementById("svgMikuMouth").setAttribute('href', "img/mikuMouth"+type+".png");
+}
+
+let flippedEyes = false;
+function changeEyes () {
+  if (Math.random() > 0.8) {
+    return;
+  }
+  flippedEyes = !flippedEyes;
+  if (flippedEyes) {
+    document.getElementById("svgMikuEyes").setAttribute('href', "img/mikuEyes1.png");
+  } else {
+    document.getElementById("svgMikuEyes").setAttribute('href', "img/mikuEyes2.png");
   }
 }
 
@@ -312,33 +357,40 @@ function update() {
       addText(" ");
       spaceRendered = true;
     }
+    setMouth(3);
+    document.getElementById("svgMikuEyes").setAttribute('href', "img/mikuEyes2.png");
     return;
   }
   spaceRendered = false;
   const phrase = player.video.findPhrase(position);
   // if (phrase && phrase.progress(position) > 0.95) {
   if (phrase.progress(position) < previousProgress) {
+    changeEyes();
     clearText();
   }
   previousProgress = phrase.progress(position);
   const word = player.video.findWord(position);
   if (previousWord && word != previousWord) {
-    console.log(previousWord.language);
     if (previousWord.language == "en") {
       addText(" ");
     }
   }
   previousWord = word;
   const index = player.video.findIndex(char);
-  if (index === currentIndex) {
-    return;
+  if (index !== currentIndex) {
+    addText(char.text);
+    word.uttered = false;
+    word.finished = false;
   }
   currentIndex = index;
+  if (!word.uttered) {
+    changeMouth();
+    word.uttered = true;
+  }
   
   /*if (unit.previous.endTime - unit.startTime < -60) {
     clearText();
   }*/
-  addText(char.text);
   // さらに精確な情報が必要な場合は `player.timer.position` でいつでも取得できます
 }
 
