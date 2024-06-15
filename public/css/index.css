@@ -12,7 +12,8 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: white;
-  background-image: url('../img/clouds.jpg');
+  background-image: url('../img/flat-lay-back-school-still-life-assortment.jpg');
+  background-size: cover;
   margin: 0;
 }
 
@@ -40,7 +41,7 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
   }
   
   #lyrics {
@@ -48,6 +49,7 @@ body {
   }
   
   #media {
+    display: none;
     position: absolute;
     right: 10px;
     bottom: 10px;
@@ -56,9 +58,14 @@ body {
   }
   
   #header {
+    display: none;
     position: absolute;
     left: 0;
     top: 0;
+  }
+
+  #position {
+    display: none;
   }
   
   #meta {
