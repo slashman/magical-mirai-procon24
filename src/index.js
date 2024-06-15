@@ -10,6 +10,8 @@
 
 import { Player } from "textalive-app-api";
 
+import animations from "./Animations";
+
 const songs = {
   superHero: {
     url: "https://piapro.jp/t/hZ35/20240130103028",
@@ -135,32 +137,29 @@ function clearText() {
   lineY = 1;
 }
 
-let animIndex = 1;
-let animDir = 1;
 let bopIndex = 0;
 let flipped = false;
+const mikuAnimation = animations[0];
+
 function flipMiku () {
   bopIndex++;
-  animIndex += animDir;
-  if (animDir == 1) {
-    if (animIndex === 11) {
-      animIndex = 9;
-      animDir = -1;
-    }
-  } else {
-    if (animIndex === 0) {
-      animIndex = 1;
-      animDir = 1;
-    }
-  }
-  document.getElementById("svgMikuBody").setAttribute('href', "img/miku2/mikub"+animIndex+".png");
+  mikuAnimation.step();
+  const baseX = -70;
+  let baseY = 280;
   if (bopIndex > 1) {
     flipped = !flipped;
-    document.getElementById("svgMikuBody").setAttribute('y', flipped ? 280 : 300);
-    document.getElementById("svgMikuEyes").setAttribute('y', flipped ? 280 : 300);
-    document.getElementById("svgMikuMouth").setAttribute('y', flipped ? 280 : 300);
+    if (flipped) {
+      baseY -= 20;
+    }
     bopIndex = 0;
   }
+  document.getElementById("svgMikuBody").setAttribute('href', mikuAnimation.frameName);
+  document.getElementById("svgMikuBody").setAttribute('y', baseY);
+  document.getElementById("svgMikuEyes").setAttribute('x', baseX + mikuAnimation.trackEyeX * 1.3);
+  document.getElementById("svgMikuEyes").setAttribute('y', baseY + mikuAnimation.trackEyeY * 1.3);
+  document.getElementById("svgMikuMouth").setAttribute('x', baseX + mikuAnimation.trackEyeX * 1.3);
+  document.getElementById("svgMikuMouth").setAttribute('y', baseY + mikuAnimation.trackEyeY * 1.3);
+  
 }
 
 let flippedMouth = false;
