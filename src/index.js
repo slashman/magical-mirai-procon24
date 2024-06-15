@@ -143,8 +143,8 @@ function flipMiku () {
   bopIndex++;
   animIndex += animDir;
   if (animDir == 1) {
-    if (animIndex === 4) {
-      animIndex = 2;
+    if (animIndex === 11) {
+      animIndex = 9;
       animDir = -1;
     }
   } else {
@@ -153,7 +153,7 @@ function flipMiku () {
       animDir = 1;
     }
   }
-  document.getElementById("svgMikuBody").setAttribute('href', "img/mikuBody"+animIndex+".png");
+  document.getElementById("svgMikuBody").setAttribute('href', "img/miku2/mikub"+animIndex+".png");
   if (bopIndex > 1) {
     flipped = !flipped;
     document.getElementById("svgMikuBody").setAttribute('y', flipped ? 280 : 300);
@@ -167,14 +167,14 @@ let flippedMouth = false;
 function changeMouth () {
   flippedMouth = !flippedMouth;
   if (flippedMouth) {
-    document.getElementById("svgMikuMouth").setAttribute('href', "img/mikuMouth1.png");
+    document.getElementById("svgMikuMouth").setAttribute('href', "img/miku2/bocas0002.png");
   } else {
-    document.getElementById("svgMikuMouth").setAttribute('href', "img/mikuMouth2.png");
+    document.getElementById("svgMikuMouth").setAttribute('href', "img/miku2/bocas0005.png");
   }
 }
 
 function setMouth (type) {
-  document.getElementById("svgMikuMouth").setAttribute('href', "img/mikuMouth"+type+".png");
+  document.getElementById("svgMikuMouth").setAttribute('href', "img/miku2/bocas000"+type+".png");
 }
 
 let flippedEyes = false;
@@ -184,9 +184,9 @@ function changeEyes () {
   }
   flippedEyes = !flippedEyes;
   if (flippedEyes) {
-    document.getElementById("svgMikuEyes").setAttribute('href', "img/mikuEyes1.png");
+    document.getElementById("svgMikuEyes").setAttribute('href', "img/miku2/eyes1.png");
   } else {
-    document.getElementById("svgMikuEyes").setAttribute('href', "img/mikuEyes2.png");
+    document.getElementById("svgMikuEyes").setAttribute('href', "img/miku2/eyes3.png");
   }
 }
 
@@ -329,9 +329,11 @@ function step(timeStamp) {
 
 let currentIndex = -1;
 let previousProgress = -1;
-let resetBeat = false;
+let lastFrame = -1;
 let spaceRendered = false;
 let previousWord;
+
+const animationSpeed = 4; // Frame per beat
 
 function update() {
   const position = player.timer.position;
@@ -342,13 +344,10 @@ function update() {
   const beat = player.findBeat(position);
   if (beat) {
     const progress = beat.progress(position);
-    if (progress < 0.1) {
-      resetBeat = true;
-    }
-    //document.getElementById("beat") .style.height = (progress * 200) + "px";
-    if (progress > 0.9 && resetBeat) {
-      resetBeat = false;
+    const frame = Math.floor(progress * animationSpeed)
+    if (frame != lastFrame) {
       flipMiku();
+      lastFrame = frame;
     }
   }
   const char = player.video.findChar(position, { loose: false });
@@ -357,8 +356,8 @@ function update() {
       addText(" ");
       spaceRendered = true;
     }
-    setMouth(3);
-    document.getElementById("svgMikuEyes").setAttribute('href', "img/mikuEyes2.png");
+    setMouth(4);
+    document.getElementById("svgMikuEyes").setAttribute('href', "img/miku2/eyes1.png");
     return;
   }
   spaceRendered = false;
