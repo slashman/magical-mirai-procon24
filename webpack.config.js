@@ -7,8 +7,17 @@ module.exports = {
 	devServer: {
 		static: './dist',
 	},
+	module: {
+		rules: [
+		  {
+			test: /\.tsx?$/,
+			use: 'ts-loader',
+			exclude: /node_modules/,
+		  },
+		],
+	},
 	resolve: {
-		extensions: ['.js'],
+		extensions: ['.tsx', '.ts', '.js'],
 	},
 	output: {
 		filename: 'main.js',
