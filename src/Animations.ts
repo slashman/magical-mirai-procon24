@@ -6,48 +6,48 @@ const mikuAnimation = new Animation({
 	startIndex: 1,
 	frames: [
 		{
-			eyeX: 0,
-			eyeY: 0
+			eyeX: 220,
+			eyeY: 176
 		},
 		{
-			eyeX: 0,
-			eyeY: 0
+			eyeX: 220,
+			eyeY: 181
 		},
 		{
-			eyeX: 0,
-			eyeY: 0
+			eyeX: 227,
+			eyeY: 179
 		},
 		{
-			eyeX: 1,
-			eyeY: 5
+			eyeX: 231,
+			eyeY: 177
 		},
 		{
-			eyeX: 10,
-			eyeY: 1
+			eyeX: 233,
+			eyeY: 174
 		},
 		{
-			eyeX: 11,
-			eyeY: 2
+			eyeX: 235,
+			eyeY: 172
 		},
 		{
-			eyeX: 10,
-			eyeY: 2
+			eyeX: 235,
+			eyeY: 173
 		},
 		{
-			eyeX: 10,
-			eyeY: 0
+			eyeX: 230,
+			eyeY: 176
 		},
 		{
-			eyeX: 4,
-			eyeY: 6
+			eyeX: 220,
+			eyeY: 174
 		},
 		{
-			eyeX: -1,
-			eyeY: 1
+			eyeX: 219,
+			eyeY: 176
 		},
 		{
-			eyeX: 1,
-			eyeY: 2
+			eyeX: 219,
+			eyeY: 177
 		}
 	]}
 );

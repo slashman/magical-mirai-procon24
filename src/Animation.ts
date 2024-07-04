@@ -23,11 +23,11 @@ export default class Animation {
 	}
 
 	get trackEyeX() {
-		return this.frames[this.currentIndex - this.startIndex].eyeX;
+		return this.frames[this.currentIndex - this.startIndex].eyeX - 220;
 	}
 
 	get trackEyeY() {
-		return this.frames[this.currentIndex - this.startIndex].eyeY;
+		return this.frames[this.currentIndex - this.startIndex].eyeY - 171;
 	}
 
 	step () {
