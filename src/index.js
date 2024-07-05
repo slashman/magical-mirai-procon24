@@ -11,6 +11,7 @@
 import { Player } from "textalive-app-api";
 
 import animations from "./Animations";
+import Ticker from "./Ticker";
 
 const songs = {
   superHero: {
@@ -106,7 +107,6 @@ function addText(str) {
   const txElement = document.getElementById("tx" + textCount);
   txElement.innerHTML = str;
   const charWidth = 64; // getTextWidth(str, "Arial 64pt");
-  console.log("charWidth", charWidth);
   cursorX += charWidth;
   cursorX += Math.floor(Math.random() * 15) - 7;
   if (cursorX > 700) {
@@ -137,10 +137,15 @@ function clearText() {
   lineY = 1;
 }
 
+const animationSpeed = 4; // Frame per beat
 let bopIndex = 0;
 let flipped = false;
 const mikuAnimation = animations[0];
+const powerTicker = new Ticker(2);
 
+function clickSymbol (){
+  console.log("click")
+}
 function flipMiku () {
   bopIndex++;
   mikuAnimation.step();
@@ -331,8 +336,18 @@ let previousProgress = -1;
 let lastFrame = -1;
 let spaceRendered = false;
 let previousWord;
+let previousBeat;
 
-const animationSpeed = 4; // Frame per beat
+function fadeSymbol() {
+  document.getElementById("tapSymbol").style.display = "none";
+}
+
+function popSymbol() {
+  const symbolElement = document.getElementById("tapSymbol");
+  symbolElement.style.display = "block";
+  symbolElement.setAttribute("x", cursorStart + 20 + Math.floor(Math.random() * (700-20-cursorStart)));
+  symbolElement.setAttribute("y", 100 + Math.floor(Math.random() * 20));
+}
 
 function update() {
   const position = player.timer.position;
@@ -342,11 +357,21 @@ function update() {
   }
   const beat = player.findBeat(position);
   if (beat) {
+    if (beat != previousBeat) {
+      powerTicker.step();
+      if (powerTicker.onCycle()) {
+        fadeSymbol();
+      } else if (powerTicker.almostCycle()) {
+        popSymbol();
+      }
+      previousBeat = beat;
+    }
     const progress = beat.progress(position);
     const frame = Math.floor(progress * animationSpeed)
     if (frame != lastFrame) {
       flipMiku();
       lastFrame = frame;
+      
     }
   }
   const char = player.video.findChar(position, { loose: false });
