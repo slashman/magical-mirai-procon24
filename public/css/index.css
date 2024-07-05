@@ -103,12 +103,13 @@ body {
   width: 1364px;
   height: 1262px;
   position: relative;
-  transform: scale(0.7) rotate(7deg);
+  /* transform: scale(0.7) rotate(7deg); */
 }
 
 #tabletFront {
   width: 1364px;
   position: absolute;
+  pointer-events: none;
 }
 
 #tabletMask {

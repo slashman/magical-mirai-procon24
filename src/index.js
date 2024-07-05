@@ -12,6 +12,7 @@ import { Player } from "textalive-app-api";
 
 import animations from "./Animations";
 import Ticker from "./Ticker";
+import pencil from "./Pencil";
 
 const songs = {
   superHero: {
@@ -193,6 +194,23 @@ function changeEyes () {
     document.getElementById("svgMikuEyes").setAttribute('href', "img/miku2/eyes3.png");
   }
 }
+
+const tabletMask = document.getElementById('tabletMask');
+tabletMask.addEventListener("mousedown", (e) => {
+  pencil.down(e);
+});
+
+tabletMask.addEventListener("mousemove", (e) => {
+  pencil.move(e);
+});
+
+tabletMask.addEventListener("mouseup", (e) => {
+  pencil.up(e);
+});
+
+tabletMask.addEventListener("mouseleave", (e) => {
+  pencil.up(e);
+});
 
 // TextAlive Player を作る
 // Instantiate a TextAlive Player instance
