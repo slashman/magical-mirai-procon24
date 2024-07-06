@@ -6,15 +6,17 @@ class Pencil {
 
 	private offX: number;
 	private offY: number;
+	private scale: number;
 
 	private currentPath: SVGPathElement;
 
 	constructor() {
 	}
 
-	initForElement(element: Element): void {
+	initForElement(element: HTMLElement, scale: number): void {
 		this.offY = element.getBoundingClientRect().top;
 		this.offX = element.getBoundingClientRect().left;
+		this.scale = scale;
 		//TODO: This on every resize
 		element.addEventListener("mousedown", (e) => {
 			this.down(e as MouseEvent);
@@ -36,11 +38,11 @@ class Pencil {
 	}
 
 	private transformX(clientX: number): number {
-		return (clientX - this.offX) * 1;
+		return (clientX - this.offX) / this.scale;
 	}
 
 	private transformY(clientY: number): number {
-		return 	(clientY - this.offY) * 1;
+		return (clientY - this.offY) / this.scale;
 	}
 
 	public down(e: MouseEvent): void {

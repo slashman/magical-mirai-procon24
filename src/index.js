@@ -195,7 +195,11 @@ function changeEyes () {
   }
 }
 
-pencil.initForElement(document.getElementById('tabletMask'));
+const tabletContainer = document.getElementById('tabletContainer');
+pencil.initForElement(
+  document.getElementById('tabletMask'),
+  tabletContainer.getBoundingClientRect().width / tabletContainer.offsetWidth
+);
 
 // TextAlive Player を作る
 // Instantiate a TextAlive Player instance
