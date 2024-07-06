@@ -160,10 +160,10 @@ function flipMiku () {
   }
   document.getElementById("svgMikuBody").setAttribute('href', mikuAnimation.frameName);
   document.getElementById("svgMikuBody").setAttribute('y', baseY);
-  document.getElementById("svgMikuEyes").setAttribute('x', baseX + mikuAnimation.trackEyeX * 1.3);
-  document.getElementById("svgMikuEyes").setAttribute('y', baseY + mikuAnimation.trackEyeY * 1.3);
-  document.getElementById("svgMikuMouth").setAttribute('x', baseX + mikuAnimation.trackEyeX * 1.3);
-  document.getElementById("svgMikuMouth").setAttribute('y', baseY + mikuAnimation.trackEyeY * 1.3);
+  document.getElementById("svgMikuEyes").setAttribute('x', baseX + mikuAnimation.trackEyeX);
+  document.getElementById("svgMikuEyes").setAttribute('y', baseY + mikuAnimation.trackEyeY);
+  document.getElementById("svgMikuMouth").setAttribute('x', baseX + mikuAnimation.trackEyeX);
+  document.getElementById("svgMikuMouth").setAttribute('y', baseY + mikuAnimation.trackEyeY);
 
   pencil.moveLayer(
     PencilLayer.LEFT_HAND,
