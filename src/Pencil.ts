@@ -59,6 +59,21 @@ class Pencil {
 		});
 	}
 
+	clear () {
+		this.layers.get(PencilLayer.HEAD)?.forEach(p => {
+			p.remove();
+		});
+		this.layers.get(PencilLayer.LEFT_HAND)?.forEach(p => {
+			p.remove();
+		});
+		this.layers.get(PencilLayer.RIGHT_HAND)?.forEach(p => {
+			p.remove();
+		});
+		this.layers.get(PencilLayer.STAGE)?.forEach(p => {
+			p.remove();
+		});
+	}
+
 	private markLast(e: MouseEvent): void {
 		this.lastX = this.transformX(e.clientX);
 		this.lastY = this.transformY(e.clientY);

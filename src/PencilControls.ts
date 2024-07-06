@@ -19,6 +19,10 @@ class PencilControls {
 			"click",
 			() => this.setLayer(PencilLayer.STAGE)
 		);
+		document.getElementById("clearBtn").addEventListener(
+			"click",
+			() => pencil.clear()
+		);
 	}
 
 	hidePointerElements() {
