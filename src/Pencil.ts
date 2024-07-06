@@ -1,3 +1,5 @@
+import PencilLayer from "./PencilLayer";
+
 class Pencil {
 	private lastX: number;
 	private lastY: number;
@@ -9,8 +11,19 @@ class Pencil {
 	private scale: number;
 
 	private currentPath: SVGPathElement;
+	private currentLayer: PencilLayer = PencilLayer.LEFT_HAND;
+	private layers: Map<PencilLayer, SVGPathElement[]> = new Map();
 
 	constructor() {
+	}
+
+	private addToLayer(path: SVGPathElement): void {
+		let paths = this.layers.get(this.currentLayer);
+		if (!paths) {
+			paths = [];
+			this.layers.set(this.currentLayer, paths);
+		}
+		paths.push(path);
 	}
 
 	initForElement(element: HTMLElement, scale: number): void {
@@ -29,6 +42,20 @@ class Pencil {
 		});
 		element.addEventListener("mouseleave", (e) => {
 			pencil.up(e as MouseEvent);
+		});
+	}
+
+	setLayer (layer: PencilLayer) {
+		this.currentLayer = layer;
+	}
+
+	moveLayer (layer: PencilLayer, x: number, y: number) {
+		const paths = this.layers.get(layer);
+		if (!paths) {
+			return;
+		}
+		paths.forEach(p => {
+			p.setAttribute("transform", `translate(${x}, ${y})`);
 		});
 	}
 
@@ -58,6 +85,7 @@ class Pencil {
 		newPath.setAttribute("stroke", "black");
 		newPath.setAttribute("stroke-width", "5px");
 		mask.appendChild(newPath);
+		this.addToLayer(newPath as SVGPathElement);
 		this.currentPath = newPath as SVGPathElement;
 	}
 

@@ -30,6 +30,23 @@ export default class Animation {
 		return this.frames[this.currentIndex - this.startIndex].eyeY - 171;
 	}
 
+	
+	get trackRightHandX() {
+		return this.frames[this.currentIndex - this.startIndex].rightHandX - 220;
+	}
+
+	get trackRightHandY() {
+		return this.frames[this.currentIndex - this.startIndex].rightHandY - 171;
+	}
+
+	get trackLeftHandX() {
+		return this.frames[this.currentIndex - this.startIndex].leftHandX - 220;
+	}
+
+	get trackLeftHandY() {
+		return this.frames[this.currentIndex - this.startIndex].leftHandY - 171;
+	}
+
 	step () {
 		this.currentIndex += this.yoyoDir;
 		if (this.yoyoDir === 1) {

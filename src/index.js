@@ -13,6 +13,8 @@ import { Player } from "textalive-app-api";
 import animations from "./Animations";
 import Ticker from "./Ticker";
 import pencil from "./Pencil";
+import PencilLayer from "./PencilLayer";
+import pencilControls from "./PencilControls";
 
 const songs = {
   superHero: {
@@ -152,10 +154,12 @@ function flipMiku () {
   mikuAnimation.step();
   const baseX = -70;
   let baseY = 280;
+  let bopped = false;
   if (bopIndex > 1) {
     flipped = !flipped;
     if (flipped) {
       baseY -= 20;
+      bopped = true;
     }
     bopIndex = 0;
   }
@@ -165,7 +169,24 @@ function flipMiku () {
   document.getElementById("svgMikuEyes").setAttribute('y', baseY + mikuAnimation.trackEyeY * 1.3);
   document.getElementById("svgMikuMouth").setAttribute('x', baseX + mikuAnimation.trackEyeX * 1.3);
   document.getElementById("svgMikuMouth").setAttribute('y', baseY + mikuAnimation.trackEyeY * 1.3);
-  
+
+  pencil.moveLayer(
+    PencilLayer.LEFT_HAND,
+    mikuAnimation.trackLeftHandX,
+    mikuAnimation.trackLeftHandY + (bopped ? -20 : 0)
+  );
+
+  pencil.moveLayer(
+    PencilLayer.RIGHT_HAND,
+    mikuAnimation.trackRightHandX,
+    mikuAnimation.trackRightHandY + (bopped ? -20 : 0)
+  );
+
+  pencil.moveLayer(
+    PencilLayer.HEAD,
+    mikuAnimation.trackEyeX,
+    mikuAnimation.trackEyeY + (bopped ? -20 : 0)
+  );
 }
 
 let flippedMouth = false;
@@ -200,6 +221,8 @@ pencil.initForElement(
   document.getElementById('tabletMask'),
   tabletContainer.getBoundingClientRect().width / tabletContainer.offsetWidth
 );
+
+pencilControls.init();
 
 // TextAlive Player を作る
 // Instantiate a TextAlive Player instance
@@ -245,6 +268,7 @@ function onAppReady(app) {
     // 再生ボタン / Start music playback
     playBtns.forEach((playBtn) =>
       playBtn.addEventListener("click", () => {
+        pencilControls.hidePointerElements();
         player.video && player.requestPlay();
       })
     );

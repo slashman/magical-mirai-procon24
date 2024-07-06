@@ -9,6 +9,12 @@
   <body>
     <div id="overlay"><button class="play" disabled>再生</button></div>
     <div id="container">
+      <div id="actionButtons">
+        <button id="leftHandBtn" disabled>Left</button>
+        <button id="rightHandBtn" disabled>Right</button>
+        <button id="headBtn" disabled>Head</button>
+        <button id="stageBtn" disabled>Stage</button>
+      </div>
       <div id="tabletContainer">
         <img id = "tabletBack" src = "img/rainbow.jpeg">
         <svg id = "tabletMask" width="780" height="1080" viewBox="0 0 780 1080">
@@ -47,6 +53,9 @@
                 </filter>
             </defs>
             <rect width="100%" height="100%" x="0" y="0" />
+            <circle r="25" cx="200" cy="850" fill="red" id = "leftHandCircle" style="display: none;"/>
+            <circle r="25" cx="620" cy="780" fill="red" id = "rightHandCircle" style="display: none;"/>
+            <circle r="25" cx="400" cy="400" fill="red" id = "headCircle" style="display: none;"/>
         </svg>
         <img id = "tabletFront" src = "img/tablet.png">
       </div>
