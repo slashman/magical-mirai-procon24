@@ -10,13 +10,41 @@ class Pencil {
 	private currentPath: SVGPathElement;
 
 	constructor() {
-		this.offY = document.getElementById("tabletMask").getBoundingClientRect().top;
-		this.offX = document.getElementById("tabletMask").getBoundingClientRect().left;
+	}
+
+	initForElement(element: Element): void {
+		this.offY = element.getBoundingClientRect().top;
+		this.offX = element.getBoundingClientRect().left;
+		//TODO: This on every resize
+		element.addEventListener("mousedown", (e) => {
+			this.down(e as MouseEvent);
+		});
+		element.addEventListener("mousemove", (e) => {
+			pencil.move(e as MouseEvent);
+		});
+		element.addEventListener("mouseup", (e) => {
+			pencil.up(e as MouseEvent);
+		});
+		element.addEventListener("mouseleave", (e) => {
+			pencil.up(e as MouseEvent);
+		});
+	}
+
+	private markLast(e: MouseEvent): void {
+		this.lastX = this.transformX(e.clientX);
+		this.lastY = this.transformY(e.clientY);
+	}
+
+	private transformX(clientX: number): number {
+		return (clientX - this.offX) * 1;
+	}
+
+	private transformY(clientY: number): number {
+		return 	(clientY - this.offY) * 1;
 	}
 
 	public down(e: MouseEvent): void {
-		this.lastX = e.clientX - this.offX;
-		this.lastY = e.clientY - this.offY;
+		this.markLast(e);
 		this.drawString = `M ${this.lastX} ${this.lastY}`;
 		this.isDrawing = true;
 
@@ -35,16 +63,17 @@ class Pencil {
 		if (!this.isDrawing) {
 			return;
 		}
-		if (this.distance(e.clientX, e.clientY) > 5) {
-			this.lastX = e.clientX - this.offX;
-			this.lastY = e.clientY - this.offY;
+		if (this.distanceToLast(e) > 5) {
+			this.markLast(e);
 			this.drawString += ` L ${this.lastX} ${this.lastY}`;
 			this.currentPath.setAttribute("d", this.drawString);
 		}
 	}
 
-	private distance(x: number, y: number): number {
-		return Math.sqrt((Math.pow(x - this.offX - this.lastX,2))+(Math.pow(y - this.offY -this.lastY,2)))
+	private distanceToLast(e: MouseEvent): number {
+		const nextX = this.transformX(e.clientX);
+		const nextY = this.transformY(e.clientY);
+		return Math.sqrt((Math.pow(nextX - this.lastX,2))+(Math.pow(nextY - this.lastY,2)))
 	}
 
 	public up(e: MouseEvent): void {

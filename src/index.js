@@ -195,22 +195,7 @@ function changeEyes () {
   }
 }
 
-const tabletMask = document.getElementById('tabletMask');
-tabletMask.addEventListener("mousedown", (e) => {
-  pencil.down(e);
-});
-
-tabletMask.addEventListener("mousemove", (e) => {
-  pencil.move(e);
-});
-
-tabletMask.addEventListener("mouseup", (e) => {
-  pencil.up(e);
-});
-
-tabletMask.addEventListener("mouseleave", (e) => {
-  pencil.up(e);
-});
+pencil.initForElement(document.getElementById('tabletMask'));
 
 // TextAlive Player を作る
 // Instantiate a TextAlive Player instance
