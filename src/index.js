@@ -11,7 +11,6 @@
 import { Player } from "textalive-app-api";
 
 import animations from "./Animations";
-import Ticker from "./Ticker";
 import pencil from "./Pencil";
 import PencilLayer from "./PencilLayer";
 import pencilControls from "./PencilControls";
@@ -144,11 +143,7 @@ const animationSpeed = 4; // Frame per beat
 let bopIndex = 0;
 let flipped = false;
 const mikuAnimation = animations[0];
-const powerTicker = new Ticker(2);
 
-function clickSymbol (){
-  console.log("click")
-}
 function flipMiku () {
   bopIndex++;
   mikuAnimation.step();
@@ -369,17 +364,6 @@ let spaceRendered = false;
 let previousWord;
 let previousBeat;
 
-function fadeSymbol() {
-  document.getElementById("tapSymbol").style.display = "none";
-}
-
-function popSymbol() {
-  const symbolElement = document.getElementById("tapSymbol");
-  symbolElement.style.display = "block";
-  symbolElement.setAttribute("x", cursorStart + 20 + Math.floor(Math.random() * (700-20-cursorStart)));
-  symbolElement.setAttribute("y", 100 + Math.floor(Math.random() * 20));
-}
-
 function update() {
   const position = player.timer.position;
   positionEl.textContent = String(Math.floor(position));
@@ -389,12 +373,6 @@ function update() {
   const beat = player.findBeat(position);
   if (beat) {
     if (beat != previousBeat) {
-      powerTicker.step();
-      if (powerTicker.onCycle()) {
-        fadeSymbol();
-      } else if (powerTicker.almostCycle()) {
-        popSymbol();
-      }
       previousBeat = beat;
     }
     const progress = beat.progress(position);
