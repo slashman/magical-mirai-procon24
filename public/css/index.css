@@ -99,14 +99,14 @@ body {
 /* CSS Masking CSS */
 
 #tabletContainer {
-  height: 1364px;
+  height: 892px;
   width: 1262px;
   position: relative;
   transform: scale(0.7);
 }
 
 #tabletFront {
-  height: 1364px;
+  height: 892px;
   position: absolute;
   pointer-events: none;
 }
@@ -116,7 +116,7 @@ body {
   height: 780px;
   position: absolute;
   left: 48px;
-  top: 290px;
+  top: 56px;
 }
 
 #tabletBack {
@@ -124,7 +124,7 @@ body {
   height: 780px;
   position: absolute;
   left: 48px;
-  top: 290px;
+  top: 56px;
 }
 
 svg {
