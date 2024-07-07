@@ -32,16 +32,36 @@ class Pencil {
 		this.scale = scale;
 		//TODO: This on every resize
 		element.addEventListener("mousedown", (e) => {
-			this.down(e as MouseEvent);
+			this.down(e.clientX, e.clientY);
 		});
 		element.addEventListener("mousemove", (e) => {
-			pencil.move(e as MouseEvent);
+			pencil.move(e.clientX, e.clientY);
 		});
 		element.addEventListener("mouseup", (e) => {
-			pencil.up(e as MouseEvent);
+			pencil.up();
 		});
 		element.addEventListener("mouseleave", (e) => {
-			pencil.up(e as MouseEvent);
+			pencil.up();
+		});
+		element.addEventListener("touchstart", (e) => {
+			e.preventDefault();
+			if (e.touches.length == 0) {
+				return;
+			}
+			this.down(e.touches[0].clientX, e.touches[0].clientY);
+		});
+		element.addEventListener("touchmove", (e) => {
+			e.preventDefault();
+			if (e.touches.length == 0) {
+				return;
+			}
+			pencil.move(e.touches[0].clientX, e.touches[0].clientY);
+		});
+		element.addEventListener("touchend", (e) => {
+			pencil.up();
+		});
+		element.addEventListener("touchleave", (e) => {
+			pencil.up();
 		});
 	}
 
@@ -74,9 +94,9 @@ class Pencil {
 		});
 	}
 
-	private markLast(e: MouseEvent): void {
-		this.lastX = this.transformX(e.clientX);
-		this.lastY = this.transformY(e.clientY);
+	private markLast(x: number, y: number): void {
+		this.lastX = this.transformX(x);
+		this.lastY = this.transformY(y);
 	}
 
 	private transformX(clientX: number): number {
@@ -87,8 +107,8 @@ class Pencil {
 		return (clientY - this.offY) / this.scale;
 	}
 
-	public down(e: MouseEvent): void {
-		this.markLast(e);
+	public down(x: number, y: number): void {
+		this.markLast(x, y);
 		this.drawString = `M ${this.lastX} ${this.lastY}`;
 		this.isDrawing = true;
 
@@ -104,24 +124,24 @@ class Pencil {
 		this.currentPath = newPath as SVGPathElement;
 	}
 
-	public move(e: MouseEvent): void {
+	public move(x: number, y: number): void {
 		if (!this.isDrawing) {
 			return;
 		}
-		if (this.distanceToLast(e) > 5) {
-			this.markLast(e);
+		if (this.distanceToLast(x, y) > 5) {
+			this.markLast(x, y);
 			this.drawString += ` L ${this.lastX} ${this.lastY}`;
 			this.currentPath.setAttribute("d", this.drawString);
 		}
 	}
 
-	private distanceToLast(e: MouseEvent): number {
-		const nextX = this.transformX(e.clientX);
-		const nextY = this.transformY(e.clientY);
+	private distanceToLast(x: number, y: number): number {
+		const nextX = this.transformX(x);
+		const nextY = this.transformY(y);
 		return Math.sqrt((Math.pow(nextX - this.lastX,2))+(Math.pow(nextY - this.lastY,2)))
 	}
 
-	public up(e: MouseEvent): void {
+	public up(): void {
 		this.endSegment();
 	}
 
