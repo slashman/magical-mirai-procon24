@@ -15,6 +15,7 @@ import pencil from "./Pencil";
 import PencilLayer from "./PencilLayer";
 import pencilControls from "./PencilControls";
 import resizer from "./Resizer";
+import imagePreloader from "./ImagePreloader";
 
 const songs = {
   superHero: {
@@ -339,9 +340,13 @@ function onTimerReady(t) {
   // ボタンを有効化する
   // Enable buttons
   if (!player.app.managed) {
-    document
-      .querySelectorAll("button")
-      .forEach((btn) => (btn.disabled = false));
+    imagePreloader.preload().then(() => {
+      resizer.resizeCanvas();
+      document.querySelector("#overlay").style.display = "none";
+      document
+        .querySelectorAll("button")
+        .forEach((btn) => (btn.disabled = false));
+    });
   }
 
   // 歌詞がなければ歌詞頭出しボタンを無効にする
@@ -416,11 +421,6 @@ function update() {
     changeMouth();
     word.uttered = true;
   }
-  
-  /*if (unit.previous.endTime - unit.startTime < -60) {
-    clearText();
-  }*/
-  // さらに精確な情報が必要な場合は `player.timer.position` でいつでも取得できます
 }
 
 window.requestAnimationFrame(step);
@@ -429,26 +429,7 @@ resizer.init(document.getElementById("tabletContainer"));
 window.addEventListener("resize", () => resizer.resizeCanvas());
 window.addEventListener("load", () => resizer.resizeCanvas());
 
-/**
- * 動画の再生位置が変更されたときに呼ばれる（あまりに頻繁な発火を防ぐため一定間隔に間引かれる）
- *
- * @param {number} position - https://developer.textalive.jp/packages/textalive-app-api/interfaces/playereventlistener.html#onthrottledtimeupdate
- */
-function onThrottledTimeUpdate(position) {
-  // 再生位置を表示する
-  // Update current position
-  //positionEl.textContent = String(Math.floor(position));
-
-  // さらに精確な情報が必要な場合は `player.timer.position` でいつでも取得できます
-  // More precise timing information can be retrieved by `player.timer.position` at any time
-}
-
-// 再生が始まったら #overlay を非表示に
-// Hide #overlay when music playback started
-function onPlay() {
-  document.querySelector("#overlay").style.display = "none";
-}
-
+function onThrottledTimeUpdate(position) {}
+function onPlay() {}
 function onPause() {}
 function onStop() {}
-
