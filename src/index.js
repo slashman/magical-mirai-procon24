@@ -148,13 +148,13 @@ const mikuAnimation = animations[0];
 function flipMiku () {
   bopIndex++;
   mikuAnimation.step();
-  const baseX = -70;
-  let baseY = 280;
+  const baseX = 200;
+  let baseY = 60;
   let bopped = false;
   if (bopIndex > 1) {
     flipped = !flipped;
     if (flipped) {
-      baseY -= 20;
+      baseY -= 9;
       bopped = true;
     }
     bopIndex = 0;
@@ -169,19 +169,19 @@ function flipMiku () {
   pencil.moveLayer(
     PencilLayer.LEFT_HAND,
     mikuAnimation.trackLeftHandX,
-    mikuAnimation.trackLeftHandY + (bopped ? -20 : 0)
+    mikuAnimation.trackLeftHandY + (bopped ? -9 : 0)
   );
 
   pencil.moveLayer(
     PencilLayer.RIGHT_HAND,
     mikuAnimation.trackRightHandX,
-    mikuAnimation.trackRightHandY + (bopped ? -20 : 0)
+    mikuAnimation.trackRightHandY + (bopped ? -9 : 0)
   );
 
   pencil.moveLayer(
     PencilLayer.HEAD,
     mikuAnimation.trackEyeX,
-    mikuAnimation.trackEyeY + (bopped ? -20 : 0)
+    mikuAnimation.trackEyeY + (bopped ? -9 : 0)
   );
 }
 

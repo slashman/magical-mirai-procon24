@@ -4,7 +4,7 @@ const mikuAnimation = new Animation({
 	prefix: 'img/miku2/mikub',
 	suffix: '.png',
 	startIndex: 1,
-	mainScale: 1.3,
+	mainScale: 0.6,
 	frames: [
 		{
 			eyeX: 220,
