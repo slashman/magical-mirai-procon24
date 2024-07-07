@@ -99,32 +99,32 @@ body {
 /* CSS Masking CSS */
 
 #tabletContainer {
-  width: 1364px;
-  height: 1262px;
+  height: 1364px;
+  width: 1262px;
   position: relative;
   transform: scale(0.7);
 }
 
 #tabletFront {
-  width: 1364px;
+  height: 1364px;
   position: absolute;
   pointer-events: none;
 }
 
 #tabletMask {
-  width: 780px;
-  height: 1080px;
+  width: 1080px;
+  height: 780px;
   position: absolute;
-  top: 48px;
-  left: 290px;
+  left: 48px;
+  top: 290px;
 }
 
 #tabletBack {
-  width: 780px;
-  height: 1080px;
+  width: 1080px;
+  height: 780px;
   position: absolute;
-  top: 48px;
-  left: 290px;
+  left: 48px;
+  top: 290px;
 }
 
 svg {
