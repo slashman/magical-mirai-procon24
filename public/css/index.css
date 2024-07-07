@@ -145,3 +145,13 @@ svg rect {
 #beat {
   background-color: aqua;
 }
+
+#actionButtons {
+  position: absolute;
+  left: 370;
+  bottom: 50;
+}
+
+#actionButtons button {
+  font-size: 28px;
+}

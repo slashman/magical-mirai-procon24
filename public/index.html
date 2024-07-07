@@ -9,13 +9,6 @@
   <body>
     <div id="overlay"><button class="play" disabled>再生</button></div>
     <div id="container">
-      <div id="actionButtons">
-        <button id="leftHandBtn" disabled>Left</button>
-        <button id="rightHandBtn" disabled>Right</button>
-        <button id="headBtn" disabled>Head</button>
-        <button id="stageBtn" disabled>Stage</button>
-        <button id="clearBtn" disabled>Clear</button>
-      </div>
       <div id="tabletContainer">
         <img id = "tabletBack" src = "img/rainbow.jpeg">
         <svg id = "tabletMask" width="780" height="1080" viewBox="0 0 780 1080">
@@ -57,6 +50,16 @@
             <circle r="25" cx="400" cy="400" fill="red" id = "headCircle" style="display: none;"/>
         </svg>
         <img id = "tabletFront" src = "img/tablet.png">
+        <div id="actionButtons">
+          <button id="leftHandBtn" disabled>Left</button>
+          <button id="rightHandBtn" disabled>Right</button>
+          <button id="headBtn" disabled>Head</button>
+          <button id="stageBtn" disabled>Stage</button>
+          <button id="clearBtn" disabled>Clear</button>
+          <button class="play" disabled>Start</button>
+          <button id="pause" disabled>Pause</button>
+          <button id="rewind" disabled>Rewind</button>
+        </div>
       </div>
     </div>
     <div id="media"></div>
@@ -77,10 +80,8 @@
         <span id="position"><strong>-</strong> [ms]</span>
       </p>
       <div id="control" style="display: none">
-        <button class="play" disabled>再生</button>
         <button id="jump" disabled>歌詞頭出し</button>
-        <button id="pause" disabled>一時停止</button>
-        <button id="rewind" disabled>巻き戻し</button>
+        
       </div>
     </div>
     <script src="./main.js"></script>
