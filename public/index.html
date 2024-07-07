@@ -8,58 +8,56 @@
   </head>
   <body>
     <div id="overlay"><button class="play" disabled>再生</button></div>
-    <div id="container">
-      <div id="tabletContainer">
-        <img id = "tabletBack" src = "img/rainbow.jpeg">
-        <svg id = "tabletMask" width="1080" height="780" viewBox="0 0 1080 780">
-            <defs>
-                <mask id="myText" width="100%" height="100%" x="0" y="0" >
-                    <rect width="100%" height="100%" x="0" y="0" style="fill: white;"/>
-                    <text x="40" y="80" fill="black" text-anchor="left" id = "svgText" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx1" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx2" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx3" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx4" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx5" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx6" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx7" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx8" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx9" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx10" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx11" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx12" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx13" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx14" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx15" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx16" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx17" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx18" filter="url(#f1)"></text>
-                    <text x="0" y="0" fill="black" text-anchor="left" id = "tx19" filter="url(#f1)"></text>
+    <div id="tabletContainer">
+      <img id = "tabletBack" src = "img/rainbow.jpeg">
+      <svg id = "tabletMask" width="1080" height="780" viewBox="0 0 1080 780">
+          <defs>
+              <mask id="myText" width="100%" height="100%" x="0" y="0" >
+                  <rect width="100%" height="100%" x="0" y="0" style="fill: white;"/>
+                  <text x="40" y="80" fill="black" text-anchor="left" id = "svgText" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx1" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx2" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx3" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx4" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx5" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx6" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx7" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx8" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx9" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx10" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx11" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx12" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx13" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx14" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx15" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx16" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx17" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx18" filter="url(#f1)"></text>
+                  <text x="0" y="0" fill="black" text-anchor="left" id = "tx19" filter="url(#f1)"></text>
 
-                    <image x="-70" y="300" width="130%" href="img/miku2/mikub1.png" filter="url(#f1)" id = "svgMikuBody"></image>
-                    <image x="-70" y="300" width="130%" href="img/miku2/eyes2.png" filter="url(#f1)" id = "svgMikuEyes"></image>
-                    <image x="-70" y="300" width="130%" href="img/miku2/bocas0002.png" filter="url(#f1)" id = "svgMikuMouth"></image>
-                </mask>
-                <filter id="f1" x="0" y="0" xmlns="http://www.w3.org/2000/svg">
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
-                </filter>
-            </defs>
-            <rect width="100%" height="100%" x="0" y="0" />
-            <circle r="25" cx="200" cy="850" fill="red" id = "leftHandCircle" style="display: none;"/>
-            <circle r="25" cx="620" cy="780" fill="red" id = "rightHandCircle" style="display: none;"/>
-            <circle r="25" cx="400" cy="400" fill="red" id = "headCircle" style="display: none;"/>
-        </svg>
-        <img id = "tabletFront" src = "img/tablet.png">
-        <div id="actionButtons">
-          <button id="leftHandBtn" disabled>Left</button>
-          <button id="rightHandBtn" disabled>Right</button>
-          <button id="headBtn" disabled>Head</button>
-          <button id="stageBtn" disabled>Stage</button>
-          <button id="clearBtn" disabled>Clear</button>
-          <button class="play" disabled>Start</button>
-          <button id="pause" disabled>Pause</button>
-          <button id="rewind" disabled>Rewind</button>
-        </div>
+                  <image x="-70" y="300" width="130%" href="img/miku2/mikub1.png" filter="url(#f1)" id = "svgMikuBody"></image>
+                  <image x="-70" y="300" width="130%" href="img/miku2/eyes2.png" filter="url(#f1)" id = "svgMikuEyes"></image>
+                  <image x="-70" y="300" width="130%" href="img/miku2/bocas0002.png" filter="url(#f1)" id = "svgMikuMouth"></image>
+              </mask>
+              <filter id="f1" x="0" y="0" xmlns="http://www.w3.org/2000/svg">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+              </filter>
+          </defs>
+          <rect width="100%" height="100%" x="0" y="0" />
+          <circle r="25" cx="200" cy="850" fill="red" id = "leftHandCircle" style="display: none;"/>
+          <circle r="25" cx="620" cy="780" fill="red" id = "rightHandCircle" style="display: none;"/>
+          <circle r="25" cx="400" cy="400" fill="red" id = "headCircle" style="display: none;"/>
+      </svg>
+      <img id = "tabletFront" src = "img/tablet.png">
+      <div id="actionButtons">
+        <button id="leftHandBtn" disabled>Left</button>
+        <button id="rightHandBtn" disabled>Right</button>
+        <button id="headBtn" disabled>Head</button>
+        <button id="stageBtn" disabled>Stage</button>
+        <button id="clearBtn" disabled>Clear</button>
+        <button class="play" disabled>Start</button>
+        <button id="pause" disabled>Pause</button>
+        <button id="rewind" disabled>Rewind</button>
       </div>
     </div>
     <div id="media"></div>

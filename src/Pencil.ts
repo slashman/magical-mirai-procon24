@@ -13,6 +13,7 @@ class Pencil {
 	private currentPath: SVGPathElement;
 	private currentLayer: PencilLayer = PencilLayer.LEFT_HAND;
 	private layers: Map<PencilLayer, SVGPathElement[]> = new Map();
+	private element: HTMLElement;
 
 	constructor() {
 	}
@@ -26,11 +27,14 @@ class Pencil {
 		paths.push(path);
 	}
 
-	initForElement(element: HTMLElement, scale: number): void {
-		this.offY = element.getBoundingClientRect().top;
-		this.offX = element.getBoundingClientRect().left;
+	updateScale(scale: number) {
+		this.offY = this.element.getBoundingClientRect().top;
+		this.offX = this.element.getBoundingClientRect().left;
 		this.scale = scale;
-		//TODO: This on every resize
+	}
+
+	initForElement(element: HTMLElement): void {
+		this.element = element;
 		element.addEventListener("mousedown", (e) => {
 			this.down(e.clientX, e.clientY);
 		});

@@ -14,6 +14,7 @@ import animations from "./Animations";
 import pencil from "./Pencil";
 import PencilLayer from "./PencilLayer";
 import pencilControls from "./PencilControls";
+import resizer from "./Resizer";
 
 const songs = {
   superHero: {
@@ -211,11 +212,7 @@ function changeEyes () {
   }
 }
 
-const tabletContainer = document.getElementById('tabletContainer');
-pencil.initForElement(
-  document.getElementById('tabletMask'),
-  tabletContainer.getBoundingClientRect().width / tabletContainer.offsetWidth
-);
+pencil.initForElement(document.getElementById('tabletMask'));
 
 pencilControls.init();
 
@@ -428,6 +425,10 @@ function update() {
 
 window.requestAnimationFrame(step);
 
+resizer.init(document.getElementById("tabletContainer"));
+window.addEventListener("resize", () => resizer.resizeCanvas());
+window.addEventListener("load", () => resizer.resizeCanvas());
+
 /**
  * 動画の再生位置が変更されたときに呼ばれる（あまりに頻繁な発火を防ぐため一定間隔に間引かれる）
  *
@@ -450,3 +451,4 @@ function onPlay() {
 
 function onPause() {}
 function onStop() {}
+
