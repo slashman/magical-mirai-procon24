@@ -112,7 +112,7 @@ function addText(str) {
   const charWidth = 64; // getTextWidth(str, "Arial 64pt");
   cursorX += charWidth;
   cursorX += Math.floor(Math.random() * 15) - 7;
-  if (cursorX > 700) {
+  if (cursorX > 900) {
     lineY++;
     cursorX = cursorStart + charWidth + Math.floor(Math.random() * 20) - 10;
   }
