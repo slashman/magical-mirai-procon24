@@ -66,38 +66,6 @@ const songs = {
 };
 
 const selectedSong = songs.futureNotes;
-
-const animateWord = function (now, unit) {
-  if (unit.contains(now) && !unit.spent) {
-    unit.spent = true;
-    console.log(unit.previous.endTime - unit.startTime);
-    if (unit.previous.endTime - unit.startTime < -60) {
-      clearText();
-    }
-    addText(unit.text);
-    if (unit.language === "en") {
-      addText(" ");
-    }    
-  }
-};
-
-/*
-let textCount = 0;
-function addText(str) {
-  textCount++;
-  if (textCount > 11) {
-    clearText();
-  }
-  document.getElementById("svgText").innerHTML += str;
-}
-
-function clearText() {
-  // document.querySelector("#text").textContent = ''; 
-  document.getElementById("svgText").innerHTML = '';
-  textCount = 0;
-}
-*/
-
 let textCount = 0;
 const cursorStart = 10;
 let cursorX = cursorStart;
@@ -110,7 +78,7 @@ function addText(str) {
   }
   const txElement = document.getElementById("tx" + textCount);
   txElement.innerHTML = str;
-  const charWidth = 64; // getTextWidth(str, "Arial 64pt");
+  const charWidth = 64;
   cursorX += charWidth;
   cursorX += Math.floor(Math.random() * 15) - 7;
   if (cursorX > 900) {
@@ -120,15 +88,6 @@ function addText(str) {
   const cursorY = (lineY * (80 + 10)) + Math.floor(Math.random() * 10) - 5;
   txElement.setAttribute("x", cursorX);
   txElement.setAttribute("y", cursorY);
-}
-
-function getTextWidth(text, font) {
-  // re-use canvas object for better performance
-  const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-  const context = canvas.getContext("2d");
-  context.font = font;
-  const metrics = context.measureText(text);
-  return metrics.width;
 }
 
 function clearText() {
@@ -319,24 +278,9 @@ function onAppReady(app) {
   
 }
 
-/**
- * 動画オブジェクトの準備が整ったとき（楽曲に関する情報を読み込み終わったとき）に呼ばれる
- *
- * @param {IVideo} v - https://developer.textalive.jp/packages/textalive-app-api/interfaces/ivideo.html
- */
 function onVideoReady(v) {
-  // メタデータを表示する
-  // Show meta data
   artistSpan.textContent = player.data.song.artist.name;
   songSpan.textContent = player.data.song.name;
-
-  // 定期的に呼ばれる各単語の "animate" 関数をセットする
-  // Set "animate" function
-  let w = player.video.firstWord;
-  /*while (w) {
-    w.animate = animateWord;
-    w = w.next;
-  }*/
 }
 
 /**
@@ -400,7 +344,6 @@ function update() {
   }
   spaceRendered = false;
   const phrase = player.video.findPhrase(position);
-  // if (phrase && phrase.progress(position) > 0.95) {
   if (phrase.progress(position) < previousProgress) {
     changeEyes();
     clearText();
