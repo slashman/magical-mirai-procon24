@@ -83,7 +83,7 @@ body {
   }
   
 #tabletContainer {
-  width: 1262px;
+  width: 1399px;
   height: 892px;
   position: relative;
   transform-origin: top left;
@@ -105,16 +105,16 @@ body {
   width: 1080px;
   height: 780px;
   position: absolute;
-  left: 48px;
-  top: 56px;
+  left: 156px;
+  top: 67px;
 }
 
 #tabletBack {
   width: 1080px;
   height: 780px;
   position: absolute;
-  left: 48px;
-  top: 56px;
+  left: 156px;
+  top: 67px;
 }
 
 svg {
