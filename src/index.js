@@ -10,86 +10,13 @@
 
 import { Player } from "textalive-app-api";
 
-import animations from "./Animations";
 import pencil from "./Pencil";
-import PencilLayer from "./PencilLayer";
 import pencilControls from "./PencilControls";
 import resizer from "./Resizer";
 import imagePreloader from "./ImagePreloader";
 import introPanel from "./IntroPanel";
 import lyricsRenderer from "./LyricsRenderer";
-
-const animationSpeed = 4; // Frame per beat
-let bopIndex = 0;
-let flipped = false;
-const mikuAnimation = animations[0];
-
-function flipMiku () {
-  bopIndex++;
-  mikuAnimation.step();
-  const baseX = 200;
-  let baseY = 60;
-  let bopped = false;
-  if (bopIndex > 1) {
-    flipped = !flipped;
-    if (flipped) {
-      baseY -= 9;
-      bopped = true;
-    }
-    bopIndex = 0;
-  }
-  document.getElementById("svgMikuBody").setAttribute('href', imagePreloader.getImageData(mikuAnimation.frameName));
-  document.getElementById("svgMikuBody").setAttribute('y', baseY);
-  document.getElementById("svgMikuEyes").setAttribute('x', baseX + mikuAnimation.trackEyeX);
-  document.getElementById("svgMikuEyes").setAttribute('y', baseY + mikuAnimation.trackEyeY);
-  document.getElementById("svgMikuMouth").setAttribute('x', baseX + mikuAnimation.trackEyeX);
-  document.getElementById("svgMikuMouth").setAttribute('y', baseY + mikuAnimation.trackEyeY);
-
-  pencil.moveLayer(
-    PencilLayer.LEFT_HAND,
-    mikuAnimation.trackLeftHandX,
-    mikuAnimation.trackLeftHandY + (bopped ? -9 : 0)
-  );
-
-  pencil.moveLayer(
-    PencilLayer.RIGHT_HAND,
-    mikuAnimation.trackRightHandX,
-    mikuAnimation.trackRightHandY + (bopped ? -9 : 0)
-  );
-
-  pencil.moveLayer(
-    PencilLayer.HEAD,
-    mikuAnimation.trackEyeX,
-    mikuAnimation.trackEyeY + (bopped ? -9 : 0)
-  );
-}
-
-let flippedMouth = false;
-function changeMouth () {
-  flippedMouth = !flippedMouth;
-  if (flippedMouth) {
-    document.getElementById("svgMikuMouth").setAttribute('href', imagePreloader.getImageData("img/miku2/bocas0002.png"));
-  } else {
-    document.getElementById("svgMikuMouth").setAttribute('href', imagePreloader.getImageData("img/miku2/bocas0005.png"));
-  }
-}
-
-function setMouth (type) {
-  document.getElementById("svgMikuMouth").setAttribute('href', imagePreloader.getImageData("img/miku2/bocas000"+type+".png"));
-}
-
-let flippedEyes = false;
-function changeEyes () {
-  if (Math.random() > 0.8) {
-    return;
-  }
-  flippedEyes = !flippedEyes;
-  if (flippedEyes) {
-    document.getElementById("svgMikuEyes").setAttribute('href', imagePreloader.getImageData("img/miku2/eyes1.png"));
-  } else {
-    document.getElementById("svgMikuEyes").setAttribute('href', imagePreloader.getImageData("img/miku2/eyes3.png"));
-  }
-}
+import dancingMiku from "./DancingMiku";
 
 pencil.initForElement(document.getElementById('tabletMask'));
 
@@ -210,6 +137,7 @@ let lastFrame = -1;
 let spaceRendered = false;
 let previousWord;
 let previousBeat;
+const animationSpeed = 4; // Frame per beat
 
 function update() {
   const position = player.timer.position;
@@ -224,7 +152,7 @@ function update() {
     const progress = beat.progress(position);
     const frame = Math.floor(progress * animationSpeed)
     if (frame != lastFrame) {
-      flipMiku();
+      dancingMiku.flipMiku();
       lastFrame = frame;
       
     }
@@ -235,14 +163,14 @@ function update() {
       lyricsRenderer.addText(" ");
       spaceRendered = true;
     }
-    setMouth(4);
+    dancingMiku.setMouth(4);
     document.getElementById("svgMikuEyes").setAttribute('href', imagePreloader.getImageData("img/miku2/eyes1.png"));
     return;
   }
   spaceRendered = false;
   const phrase = player.video.findPhrase(position);
   if (phrase.progress(position) < previousProgress) {
-    changeEyes();
+    dancingMiku.changeEyes();
     lyricsRenderer.clearText();
   }
   previousProgress = phrase.progress(position);
@@ -261,7 +189,7 @@ function update() {
   }
   currentIndex = index;
   if (!word.uttered) {
-    changeMouth();
+    dancingMiku.changeMouth();
     word.uttered = true;
   }
 }
