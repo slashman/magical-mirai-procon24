@@ -160,7 +160,7 @@ function flipMiku () {
     }
     bopIndex = 0;
   }
-  document.getElementById("svgMikuBody").setAttribute('href', mikuAnimation.frameName);
+  document.getElementById("svgMikuBody").setAttribute('href', imagePreloader.getImageData(mikuAnimation.frameName));
   document.getElementById("svgMikuBody").setAttribute('y', baseY);
   document.getElementById("svgMikuEyes").setAttribute('x', baseX + mikuAnimation.trackEyeX);
   document.getElementById("svgMikuEyes").setAttribute('y', baseY + mikuAnimation.trackEyeY);
@@ -190,14 +190,14 @@ let flippedMouth = false;
 function changeMouth () {
   flippedMouth = !flippedMouth;
   if (flippedMouth) {
-    document.getElementById("svgMikuMouth").setAttribute('href', "img/miku2/bocas0002.png");
+    document.getElementById("svgMikuMouth").setAttribute('href', imagePreloader.getImageData("img/miku2/bocas0002.png"));
   } else {
-    document.getElementById("svgMikuMouth").setAttribute('href', "img/miku2/bocas0005.png");
+    document.getElementById("svgMikuMouth").setAttribute('href', imagePreloader.getImageData("img/miku2/bocas0005.png"));
   }
 }
 
 function setMouth (type) {
-  document.getElementById("svgMikuMouth").setAttribute('href', "img/miku2/bocas000"+type+".png");
+  document.getElementById("svgMikuMouth").setAttribute('href', imagePreloader.getImageData("img/miku2/bocas000"+type+".png"));
 }
 
 let flippedEyes = false;
@@ -207,9 +207,9 @@ function changeEyes () {
   }
   flippedEyes = !flippedEyes;
   if (flippedEyes) {
-    document.getElementById("svgMikuEyes").setAttribute('href', "img/miku2/eyes1.png");
+    document.getElementById("svgMikuEyes").setAttribute('href', imagePreloader.getImageData("img/miku2/eyes1.png"));
   } else {
-    document.getElementById("svgMikuEyes").setAttribute('href', "img/miku2/eyes3.png");
+    document.getElementById("svgMikuEyes").setAttribute('href', imagePreloader.getImageData("img/miku2/eyes3.png"));
   }
 }
 
@@ -380,7 +380,7 @@ function update() {
       spaceRendered = true;
     }
     setMouth(4);
-    document.getElementById("svgMikuEyes").setAttribute('href', "img/miku2/eyes1.png");
+    document.getElementById("svgMikuEyes").setAttribute('href', imagePreloader.getImageData("img/miku2/eyes1.png"));
     return;
   }
   spaceRendered = false;
