@@ -39,18 +39,12 @@ body {
     display: flex;
   }
 
-  #startBtn {
+  #loadingButtons button {
     padding: 1em;
     font-size: 3vh;
     display: inline-block;
   }
 
-  #languageBtn {
-    padding: 1em;
-    font-size: 3vh;
-    display: inline-block;
-  }
-  
   #container {
     width: 100%;
     display: flex;

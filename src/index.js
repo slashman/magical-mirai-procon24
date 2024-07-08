@@ -16,79 +16,8 @@ import PencilLayer from "./PencilLayer";
 import pencilControls from "./PencilControls";
 import resizer from "./Resizer";
 import imagePreloader from "./ImagePreloader";
+import introPanel from "./IntroPanel";
 
-const songs = {
-  superHero: {
-    url: "https://piapro.jp/t/hZ35/20240130103028",
-    corrections: { 
-      // Music map correction history
-      beatId : 4592293 , 
-      chordId : 2727635 , 
-      repetitiveSegmentId : 2824326 , 
-      // Lyrics timing correction history: https://textalive.jp/lyrics/piapro.jp%2Ft%2FhZ35%2F20240130103028
-      lyricId : 59415 , 
-      lyricDiffId : 13962 
-    }
-  },
-  theFutureISpoke: {
-    url: "https://piapro.jp/t/--OD/20240202150903",
-    corrections: {
-        beatId: 4592296,
-        chordId: 2727636,
-        repetitiveSegmentId: 2824327,
-        // Lyric timing correction history: https://textalive.jp/lyrics/piapro.jp%2Ft%2F--OD%2F20240202150903
-        lyricId: 59416,
-        lyricDiffId: 13963
-    }
-  },
-  futureNotes: {
-    url: "https://piapro.jp/t/XiaI/20240201203346",
-    corrections: {
-      beatId: 4592297,
-      chordId: 2727637,
-      repetitiveSegmentId: 2824328,
-      // Lyrics timing correction history: https://textalive.jp/lyrics/piapro.jp%2Ft%2FXiaI%2F20240201203346
-      lyricId: 59417,
-      lyricDiffId: 13964
-    }
-  },
-  futureSymphony: {
-    url: "https://piapro.jp/t/Rejk/20240202164429",
-    corrections: {
-      beatId: 4592298,
-      chordId: 2727638,
-      repetitiveSegmentId: 2824329,
-      // Lyric timing correction history: https://textalive.jp/lyrics/piapro.jp%2Ft%2FRejk%2F20240202164429
-      lyricId: 59418,
-      lyricDiffId: 13965
-    }
-  },
-  reality: {
-    url: "https://piapro.jp/t/ELIC/20240130010349",
-    corrections: {
-      
-            beatId: 4592299,
-            chordId: 2727639,
-            repetitiveSegmentId: 2824330,
-            // 歌詞タイミング訂正履歴: https://textalive.jp/lyrics/piapro.jp%2Ft%2FELIC%2F20240130010349
-            lyricId: 59419,
-            lyricDiffId: 13966
-    }
-  },
-  theMarks: {
-    url: "https://piapro.jp/t/xEA7/20240202002556",
-    corrections: {
-      beatId: 4592300,
-      chordId: 2727640,
-      repetitiveSegmentId: 2824331,
-      // 歌詞タイミング訂正履歴: https://textalive.jp/lyrics/piapro.jp%2Ft%2FxEA7%2F20240202002556
-      lyricId: 59420,
-      lyricDiffId: 13967
-    }
-  }
-};
-
-const selectedSong = songs.futureNotes;
 let textCount = 0;
 const cursorStart = 10;
 let cursorX = cursorStart;
@@ -227,25 +156,8 @@ const rewindBtn = document.querySelector("#rewind");
 const artistSpan = document.querySelector("#artist span");
 const songSpan = document.querySelector("#song span");
 
-document.querySelector("#startBtn").addEventListener(
-  "click",
-  () => document.querySelector("#overlay").style.display = "none"
-);
+introPanel.init(player);
 
-let language = 'jp';
-document.querySelector("#languageBtn").addEventListener(
-  "click",
-  () => {
-    document.getElementById(`${language}Instructions` ).style.display = "none";
-    language = language === 'jp' ? 'en' : 'jp';
-    document.getElementById(`${language}Instructions` ).style.display = "block";
-    document.getElementById(`languageBtn`).innerHTML = language === 'jp' ? 'English' : '日本人';
-    document.getElementById(`startBtn`).innerHTML = language === 'jp' ? '始める!' : 'Start!';
-    if (document.getElementById(`loadingTxt`)) {
-      document.getElementById(`loadingTxt`).innerHTML = language === 'jp' ? '読み込み中...' : 'Loading...';
-    } 
-  }
-);
 
 /**
  * TextAlive App が初期化されたときに呼ばれる
@@ -291,14 +203,8 @@ function onAppReady(app) {
       );
   }
 
-  // 楽曲URLが指定されていなければ マジカルミライ 2020テーマ曲を読み込む
-  // Load a song when a song URL is not specified
-  if (!app.songUrl) {
-    player.createFromSongUrl(selectedSong.url, { 
-      video: selectedSong.corrections
-    });
-  }
-  
+  introPanel.onAppReady(app.songURL);
+ 
 }
 
 function onVideoReady(v) {
@@ -318,6 +224,7 @@ function onTimerReady(t) {
     imagePreloader.preload().then(() => {
       resizer.resizeCanvas();
       document.getElementById("loadingTxt").remove();
+      introPanel.dismiss();
       document
         .querySelectorAll("button")
         .forEach((btn) => (btn.disabled = false));
