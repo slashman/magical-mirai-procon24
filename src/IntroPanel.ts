@@ -14,6 +14,7 @@ class IntroPanel {
 	init (player: any) {
 		this.player = player;
 		this.language = 'jp';
+		this.initSongButton("songSuperHero", songData.superHero);
 		this.initSongButton("songTheFutureISpoke", songData.theFutureISpoke);
 		this.initSongButton("songFutureNotes", songData.futureNotes);
 		this.initSongButton("songFutureSymphony", songData.futureSymphony);
