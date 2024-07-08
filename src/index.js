@@ -62,6 +62,29 @@ const songs = {
       lyricId: 59418,
       lyricDiffId: 13965
     }
+  },
+  reality: {
+    url: "https://piapro.jp/t/ELIC/20240130010349",
+    corrections: {
+      
+            beatId: 4592299,
+            chordId: 2727639,
+            repetitiveSegmentId: 2824330,
+            // 歌詞タイミング訂正履歴: https://textalive.jp/lyrics/piapro.jp%2Ft%2FELIC%2F20240130010349
+            lyricId: 59419,
+            lyricDiffId: 13966
+    }
+  },
+  theMarks: {
+    url: "https://piapro.jp/t/xEA7/20240202002556",
+    corrections: {
+      beatId: 4592300,
+      chordId: 2727640,
+      repetitiveSegmentId: 2824331,
+      // 歌詞タイミング訂正履歴: https://textalive.jp/lyrics/piapro.jp%2Ft%2FxEA7%2F20240202002556
+      lyricId: 59420,
+      lyricDiffId: 13967
+    }
   }
 };
 
