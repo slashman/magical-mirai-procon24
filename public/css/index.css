@@ -100,9 +100,15 @@ body {
 
 #tabletContainer {
   width: 1262px;
+  height: 892px;
   position: relative;
   transform-origin: top left;
-  transform: scale(0.7);
+}
+
+#tabletSuperContainer {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #tabletFront {
