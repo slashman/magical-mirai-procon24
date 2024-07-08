@@ -11,8 +11,10 @@ class Resizer {
 		if (!this.container) {
 			return;
 		}
-		const widthScale = innerWidth / 1262;
-		const heightScale = innerHeight / 892;
+		const referenceHeight = document.body.clientHeight;
+		const referenceWidth = document.body.clientWidth;
+		const widthScale = referenceWidth / 1262;
+		const heightScale = referenceHeight / 892;
 		const scale = widthScale > heightScale ? heightScale : widthScale;
 		this.container.style.transform = `scale(${scale})`;
 		const tabletSuperContainer = document.getElementById('tabletSuperContainer');
