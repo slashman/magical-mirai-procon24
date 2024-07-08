@@ -138,11 +138,16 @@ svg rect {
 
 #actionButtons {
   position: absolute;
-  top: 200;
-  right: 20;
+  top: 75;
+  right: 65;
   width: 100px;
 }
 
 #actionButtons button {
   font-size: 28px;
+}
+
+.tabletButton {
+  width: 95px;
+  height: 95px;
 }
