@@ -239,13 +239,16 @@ player.addListener({
 });
 
 const playBtns = document.querySelectorAll(".play");
-const jumpBtn = document.querySelector("#jump");
 const pauseBtn = document.querySelector("#pause");
 const rewindBtn = document.querySelector("#rewind");
-const positionEl = document.querySelector("#position strong");
 
 const artistSpan = document.querySelector("#artist span");
 const songSpan = document.querySelector("#song span");
+
+document.querySelector("#startBtn").addEventListener(
+  "click",
+  () => document.querySelector("#overlay").style.display = "none"
+);
 
 /**
  * TextAlive App が初期化されたときに呼ばれる
@@ -332,7 +335,7 @@ function onTimerReady(t) {
   if (!player.app.managed) {
     imagePreloader.preload().then(() => {
       resizer.resizeCanvas();
-      document.querySelector("#overlay").style.display = "none";
+      document.getElementById("loadingTxt").remove();
       document
         .querySelectorAll("button")
         .forEach((btn) => (btn.disabled = false));
