@@ -17,40 +17,7 @@ import pencilControls from "./PencilControls";
 import resizer from "./Resizer";
 import imagePreloader from "./ImagePreloader";
 import introPanel from "./IntroPanel";
-
-let textCount = 0;
-const cursorStart = 10;
-let cursorX = cursorStart;
-let lineY = 1;
-function addText(str) {
-  textCount++;
-  if (textCount > 19) {
-    // All text used sorry
-    return;
-  }
-  const txElement = document.getElementById("tx" + textCount);
-  txElement.innerHTML = str;
-  const charWidth = 64;
-  cursorX += charWidth;
-  cursorX += Math.floor(Math.random() * 15) - 7;
-  if (cursorX > 900) {
-    lineY++;
-    cursorX = cursorStart + charWidth + Math.floor(Math.random() * 20) - 10;
-  }
-  const cursorY = (lineY * (80 + 10)) + Math.floor(Math.random() * 10) - 5;
-  txElement.setAttribute("x", cursorX);
-  txElement.setAttribute("y", cursorY);
-}
-
-function clearText() {
-  for (let i = 1; i <= 19; i++) {
-    const txElement = document.getElementById("tx" + i);
-    txElement.innerHTML = "";
-  }
-  textCount = 0;
-  cursorX = 40;
-  lineY = 1;
-}
+import lyricsRenderer from "./LyricsRenderer";
 
 const animationSpeed = 4; // Frame per beat
 let bopIndex = 0;
@@ -265,7 +232,7 @@ function update() {
   const char = player.video.findChar(position, { loose: false });
   if (!char) {
     if (!spaceRendered) {
-      addText(" ");
+      lyricsRenderer.addText(" ");
       spaceRendered = true;
     }
     setMouth(4);
@@ -276,19 +243,19 @@ function update() {
   const phrase = player.video.findPhrase(position);
   if (phrase.progress(position) < previousProgress) {
     changeEyes();
-    clearText();
+    lyricsRenderer.clearText();
   }
   previousProgress = phrase.progress(position);
   const word = player.video.findWord(position);
   if (previousWord && word != previousWord) {
     if (previousWord.language == "en") {
-      addText(" ");
+      lyricsRenderer.addText(" ");
     }
   }
   previousWord = word;
   const index = player.video.findIndex(char);
   if (index !== currentIndex) {
-    addText(char.text);
+    lyricsRenderer.addText(char.text);
     word.uttered = false;
     word.finished = false;
   }
