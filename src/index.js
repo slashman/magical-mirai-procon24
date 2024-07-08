@@ -15,8 +15,7 @@ import pencilControls from "./PencilControls";
 import resizer from "./Resizer";
 import imagePreloader from "./ImagePreloader";
 import introPanel from "./IntroPanel";
-import lyricsRenderer from "./LyricsRenderer";
-import dancingMiku from "./DancingMiku";
+import animationController from "./AnimationController";
 
 pencil.initForElement(document.getElementById('tabletMask'));
 
@@ -126,75 +125,7 @@ function onTimerReady(t) {
   }
 }
 
-function step(timeStamp) {
-  update(timeStamp);
-  window.requestAnimationFrame(step);
-}
-
-let currentIndex = -1;
-let previousProgress = -1;
-let lastFrame = -1;
-let spaceRendered = false;
-let previousWord;
-let previousBeat;
-const animationSpeed = 4; // Frame per beat
-
-function update() {
-  const position = player.timer.position;
-  if (!player.video) {
-    return;
-  }
-  const beat = player.findBeat(position);
-  if (beat) {
-    if (beat != previousBeat) {
-      previousBeat = beat;
-    }
-    const progress = beat.progress(position);
-    const frame = Math.floor(progress * animationSpeed)
-    if (frame != lastFrame) {
-      dancingMiku.flipMiku();
-      lastFrame = frame;
-      
-    }
-  }
-  const char = player.video.findChar(position, { loose: false });
-  if (!char) {
-    if (!spaceRendered) {
-      lyricsRenderer.addText(" ");
-      spaceRendered = true;
-    }
-    dancingMiku.setMouth(4);
-    document.getElementById("svgMikuEyes").setAttribute('href', imagePreloader.getImageData("img/miku2/eyes1.png"));
-    return;
-  }
-  spaceRendered = false;
-  const phrase = player.video.findPhrase(position);
-  if (phrase.progress(position) < previousProgress) {
-    dancingMiku.changeEyes();
-    lyricsRenderer.clearText();
-  }
-  previousProgress = phrase.progress(position);
-  const word = player.video.findWord(position);
-  if (previousWord && word != previousWord) {
-    if (previousWord.language == "en") {
-      lyricsRenderer.addText(" ");
-    }
-  }
-  previousWord = word;
-  const index = player.video.findIndex(char);
-  if (index !== currentIndex) {
-    lyricsRenderer.addText(char.text);
-    word.uttered = false;
-    word.finished = false;
-  }
-  currentIndex = index;
-  if (!word.uttered) {
-    dancingMiku.changeMouth();
-    word.uttered = true;
-  }
-}
-
-window.requestAnimationFrame(step);
+animationController.init(player);
 
 resizer.init(document.getElementById("tabletContainer"));
 window.addEventListener("resize", () => resizer.resizeCanvas());
