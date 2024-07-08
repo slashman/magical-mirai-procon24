@@ -73,31 +73,6 @@ body {
     background: rgba(0,0,0,0.2);
   }
   
-  #footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
-  
-  #footer > p {
-    margin-left: 10px;
-  }
-  
-  #control {
-    margin: 10px;
-    padding: 5px;
-    background: rgba(0,0,0,0.2);
-  }
-  
-  #control > button {
-    margin-right: 5px;
-  }
-  #control > button:last-child {
-    margin-right: 0;
-  }
-
-/* CSS Masking CSS */
-
 #tabletContainer {
   width: 1262px;
   height: 892px;

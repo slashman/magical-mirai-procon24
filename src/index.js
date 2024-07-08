@@ -256,22 +256,12 @@ function onAppReady(app) {
   // TextAlive ホストと接続されていなければ再生コントロールを表示する
   // Show control if this app is launched standalone (not connected to a TextAlive host)
   if (!app.managed) {
-    document.querySelector("#control").style.display = "block";
-
     // 再生ボタン / Start music playback
     playBtns.forEach((playBtn) =>
       playBtn.addEventListener("click", () => {
         pencilControls.hidePointerElements();
         player.video && player.requestPlay();
       })
-    );
-
-    // 歌詞頭出しボタン / Seek to the first character in lyrics text
-    jumpBtn.addEventListener(
-      "click",
-      () =>
-        player.video &&
-        player.requestMediaSeek(player.video.firstChar.startTime)
     );
 
     // 一時停止ボタン / Pause music playback
@@ -348,10 +338,6 @@ function onTimerReady(t) {
         .forEach((btn) => (btn.disabled = false));
     });
   }
-
-  // 歌詞がなければ歌詞頭出しボタンを無効にする
-  // Disable jump button if no lyrics is available
-  jumpBtn.disabled = !player.video.firstChar;
 }
 
 function step(timeStamp) {
@@ -368,7 +354,6 @@ let previousBeat;
 
 function update() {
   const position = player.timer.position;
-  positionEl.textContent = String(Math.floor(position));
   if (!player.video) {
     return;
   }
