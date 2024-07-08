@@ -55,7 +55,7 @@ class IntroPanel {
 		});
 	}
 
-	private dismiss(): void {
+	dismiss(): void {
 		(document.querySelector("#overlay") as HTMLElement).style.display = "none";
 	}
 }
