@@ -34,10 +34,21 @@ body {
     font-size: 3vh;
     z-index: 100;
   }
-  
+
+  #loadingButtons {
+    display: flex;
+  }
+
   #startBtn {
     padding: 1em;
     font-size: 3vh;
+    display: inline-block;
+  }
+
+  #languageBtn {
+    padding: 1em;
+    font-size: 3vh;
+    display: inline-block;
   }
   
   #container {

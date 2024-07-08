@@ -250,6 +250,21 @@ document.querySelector("#startBtn").addEventListener(
   () => document.querySelector("#overlay").style.display = "none"
 );
 
+let language = 'jp';
+document.querySelector("#languageBtn").addEventListener(
+  "click",
+  () => {
+    document.getElementById(`${language}Instructions` ).style.display = "none";
+    language = language === 'jp' ? 'en' : 'jp';
+    document.getElementById(`${language}Instructions` ).style.display = "block";
+    document.getElementById(`languageBtn`).innerHTML = language === 'jp' ? 'English' : '日本人';
+    document.getElementById(`startBtn`).innerHTML = language === 'jp' ? '始める!' : 'Start!';
+    if (document.getElementById(`loadingTxt`)) {
+      document.getElementById(`loadingTxt`).innerHTML = language === 'jp' ? '読み込み中...' : 'Loading...';
+    } 
+  }
+);
+
 /**
  * TextAlive App が初期化されたときに呼ばれる
  *
