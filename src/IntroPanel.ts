@@ -50,6 +50,7 @@ class IntroPanel {
 	songSelected(selectedSongData: any) {
 		document.querySelectorAll(".startBtn")
 				.forEach((btn) => ((btn as HTMLButtonElement).disabled = true));
+		document.getElementById(`loadingTxt`).style.display = "block";
 		this.player.createFromSongUrl(selectedSongData.url, { 
 			video: selectedSongData.corrections
 		});
