@@ -7,92 +7,92 @@ const mikuAnimation = new Animation({
 	mainScale: 0.7,
 	frames: [
 		{
-			eyeX: 220,
-			eyeY: 176,
-			rightHandX: 301,
-			rightHandY: 240,
-			leftHandX: 158,
-			leftHandY: 258
+			eyeX: 441,
+			eyeY: 428,
+			rightHandX: 591,
+			rightHandY: 488,
+			leftHandX: 319,
+			leftHandY: 491
 		},
 		{
-			eyeX: 220,
-			eyeY: 181,
-			rightHandX: 300,
-			rightHandY: 243,
-			leftHandX: 160,
-			leftHandY: 256
+			eyeX: 443,
+			eyeY: 436,
+			rightHandX: 593,
+			rightHandY: 493,
+			leftHandX: 321,
+			leftHandY: 495
 		},
 		{
-			eyeX: 227,
-			eyeY: 179,
-			rightHandX: 307,
-			rightHandY: 241,
-			leftHandX: 160,
-			leftHandY: 258
+			eyeX: 458,
+			eyeY: 432,
+			rightHandX: 603,
+			rightHandY: 491,
+			leftHandX: 322,
+			leftHandY: 492
 		},
 		{
-			eyeX: 231,
-			eyeY: 177,
-			rightHandX: 310,
-			rightHandY: 240,
-			leftHandX: 166,
-			leftHandY: 257
+			eyeX: 459,
+			eyeY: 431,
+			rightHandX: 607,
+			rightHandY: 487,
+			leftHandX: 332,
+			leftHandY: 489
 		},
 		{
-			eyeX: 233,
-			eyeY: 174,
-			rightHandX: 311,
-			rightHandY: 238,
-			leftHandX: 166,
-			leftHandY: 258
+			eyeX: 459,
+			eyeY: 428,
+			rightHandX: 609,
+			rightHandY: 483,
+			leftHandX: 334,
+			leftHandY: 490
 		},
 		{
-			eyeX: 235,
-			eyeY: 172,
-			rightHandX: 310,
-			rightHandY: 236,
-			leftHandX: 167,
-			leftHandY: 257
+			eyeX: 459,
+			eyeY: 426,
+			rightHandX: 609,
+			rightHandY: 481,
+			leftHandX: 335,
+			leftHandY: 488
 		},
 		{
-			eyeX: 235,
-			eyeY: 173,
-			rightHandX: 309,
-			rightHandY: 238,
-			leftHandX: 172,
-			leftHandY: 258
+			eyeX: 460,
+			eyeY: 426,
+			rightHandX: 607,
+			rightHandY: 483,
+			leftHandX: 344,
+			leftHandY: 489
 		},
 		{
-			eyeX: 230,
-			eyeY: 176,
-			rightHandX: 306,
-			rightHandY: 241,
-			leftHandX: 164,
-			leftHandY: 262
+			eyeX: 443,
+			eyeY: 432,
+			rightHandX: 595,
+			rightHandY: 490,
+			leftHandX: 328,
+			leftHandY: 500
 		},
 		{
-			eyeX: 220,
-			eyeY: 174,
-			rightHandX: 302,
-			rightHandY: 239,
-			leftHandX: 157,
-			leftHandY: 258
+			eyeX: 437,
+			eyeY: 427,
+			rightHandX: 589,
+			rightHandY: 487,
+			leftHandX: 316,
+			leftHandY: 491
 		},
 		{
-			eyeX: 219,
-			eyeY: 176,
-			rightHandX: 300,
-			rightHandY: 238,
-			leftHandX: 158,
-			leftHandY: 258
+			eyeX: 441,
+			eyeY: 428,
+			rightHandX: 588,
+			rightHandY: 485,
+			leftHandX: 318,
+			leftHandY: 492
 		},
 		{
-			eyeX: 219,
-			eyeY: 177,
-			rightHandX: 299,
-			rightHandY: 240,
-			leftHandX: 159,
-			leftHandY: 258
+			eyeX: 441,
+			eyeY: 428,
+			rightHandX: 586,
+			rightHandY: 486,
+			leftHandX: 318,
+			leftHandY: 492
 		}
 	]}
 );
