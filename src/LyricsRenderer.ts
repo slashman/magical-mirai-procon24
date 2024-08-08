@@ -1,3 +1,4 @@
+const MAX_CHARACTER_INDEX = 25;
 class LyricsRenderer {
 	private textCount: number = 0;
 	private cursorStart: number = 10;
@@ -6,7 +7,7 @@ class LyricsRenderer {
 	
 	addText(str: string) {
 	  this.textCount++;
-	  if (this.textCount > 19) {
+	  if (this.textCount > MAX_CHARACTER_INDEX) {
 		// All text used sorry
 		return;
 	  }
@@ -25,7 +26,7 @@ class LyricsRenderer {
 	}
 	
 	clearText() {
-	  for (let i = 1; i <= 19; i++) {
+	  for (let i = 1; i <= MAX_CHARACTER_INDEX; i++) {
 		const txElement = document.getElementById("tx" + i);
 		txElement.innerHTML = "";
 	  }
